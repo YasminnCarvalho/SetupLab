@@ -31,11 +31,13 @@
         <select id="category-filter">
             <option value="">Todas as categorias</option>
 
-            @foreach(array_unique(array_column($componentes, 'categoria')) as $categoria)
-                <option value="{{ $categoria }}">
-                    {{ $categoria }}
-                </option>
-            @endforeach
+           
+        @foreach($categorias as $codigo => $nome)
+            <option value="{{ $codigo }}">
+                {{ $nome }}
+            </option>
+    @endforeach
+
         </select>
 
     </div>
@@ -47,7 +49,7 @@
             <article
                 class="catalog-card"
                 data-name="{{ mb_strtolower($componente['nome']) }}"
-                data-category="{{ $componente['categoria'] }}"
+                data-category="{{ $categorias[$componente['categoria']] ?? $componente['categoria'] }}"
             >
 
                 <div class="catalog-image">
@@ -94,5 +96,4 @@
 </section>
 
 <script src="{{ asset('js/componentes.js') }}" defer></script>
-
 @endsection
