@@ -11,29 +11,15 @@
     </div>
 
     <div class="config-layout">
-
         <aside class="config-panel">
             <h2>Componentes</h2>
- 
-            @foreach([
-                'gabinete' => 'Gabinete',
-                'processador' => 'Processador',
-                'placa-mae' => 'Placa-mãe',
-                'memoria' => 'Memória RAM',
-                'placa-video' => 'Placa de vídeo',
-                'ssd' => 'SSD / Armazenamento',
-                'fonte' => 'Fonte de alimentação',
-                'fans' => 'Fans / Ventoinhas',
-                'hd' => 'HD / Disco rígido',
-                'cooler' => 'Cooler do processador',
-                'water-cooler' => 'Water cooler',
 
-            ] as $key => $label)
-
+            @foreach(\App\Services\CatalogoComponentes::nomesCategorias() as $key => $label)
                 <button
                     type="button"
                     class="config-category"
-                    data-category="{{ $key }}">
+                    data-category="{{ $key }}"
+                >
                     <span class="category-name">{{ $label }}</span>
                     <span class="category-check">+</span>
                 </button>
@@ -44,34 +30,32 @@
             <div class="pc-preview">
                 <div class="pc-stage">
                     <img
+                        id="pc-base"
                         class="pc-layer pc-base"
                         src="{{ asset('images/montagem/gabinete.png') }}"
-                        alt="Gabinete do computador">
+                        alt="Gabinete do computador"
+                    >
 
-                    
-                    @foreach([
-                        'placa-mae',
-                        'processador',
-                        'memoria',
-                        'placa-video',
-                        'ssd',
-                        'fonte',
-                        'fans'
-                    ] as $layer)
-
-                        <img
-                            id="layer-{{ $layer }}"
-                            class="pc-layer component-layer"
-                            src="{{ asset('images/montagem/' . $layer . '.png') }}"
-                            alt=""
-                            hidden>
+                    @foreach($componentes as $componente)
+                        @if($componente['categoria'] !== 'gabinete' && $componente['imagem_montagem'])
+                            <img
+                                id="layer-{{ $componente['id'] }}"
+                                class="pc-layer component-layer"
+                                data-component-id="{{ $componente['id'] }}"
+                                data-category="{{ $componente['categoria'] }}"
+                                src="{{ asset('images/montagem/' . $componente['imagem_montagem']) }}"
+                                alt="{{ $componente['nome'] }}"
+                                hidden
+                            >
+                        @endif
                     @endforeach
                 </div>
+
                 <p>Prévia ilustrativa da montagem</p>
             </div>
 
             <div class="component-picker">
-                <h2 id="picker-title">Escolha seu processador</h2>
+                <h2 id="picker-title">Escolha: Processador</h2>
 
                 <div class="component-grid">
                     @foreach($componentes as $componente)
@@ -81,11 +65,13 @@
                             data-id="{{ $componente['id'] }}"
                             data-name="{{ $componente['nome'] }}"
                             data-category="{{ $componente['categoria'] }}"
-                            data-price="{{ $componente['preco'] }}">
-
+                            data-price="{{ $componente['preco'] }}"
+                            data-image="{{ $componente['imagem_montagem'] ?? '' }}"
+                        >
                             <img
-                                src="{{ asset('images/montagem/' . $componente['imagem']) }}"
-                                alt="{{ $componente['nome'] }}">
+                                src="{{ asset('images/componentes/' . $componente['imagem_catalogo']) }}"
+                                alt="{{ $componente['nome'] }}"
+                            >
 
                             <strong>{{ $componente['nome'] }}</strong>
 
@@ -112,9 +98,11 @@
                 <strong id="setup-total">R$ 0,00</strong>
             </div>
 
-            <button type="button"
-                    id="save-setup"
-                    class="btn-primary">
+            <button
+                type="button"
+                id="save-setup"
+                class="btn-primary"
+            >
                 Salvar montagem
             </button>
 

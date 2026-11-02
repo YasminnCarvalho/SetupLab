@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const selected = {};
 
-    
     const quantityLimits = {
         'memoria': 4,
         'ssd': 4,
@@ -10,13 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'fans': 6
     };
 
-
-    function getMaxQuantity(category) {
-        return quantityLimits[category] || 1;
-    }
-
     const categories = document.querySelectorAll('.config-category');
     const options = document.querySelectorAll('.component-option');
+    const layers = document.querySelectorAll('.component-layer');
 
     const pickerTitle = document.getElementById('picker-title');
     const setupItems = document.getElementById('setup-items');
@@ -38,20 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
         'water-cooler': 'Water cooler'
     };
 
-    const visualCategories = [
-        'placa-mae',
-        'processador',
-        'memoria',
-        'placa-video',
-        'ssd',
-        'fonte',
-        'fans'
-    ];
-
     const money = value => value.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'
     });
+
+    function getMaxQuantity(category) {
+        return quantityLimits[category] || 1;
+    }
 
     function chooseCategory(category) {
         categories.forEach(button => {
@@ -72,12 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updatePreview() {
-        visualCategories.forEach(category => {
-            const layer = document.getElementById('layer-' + category);
+        layers.forEach(layer => {
+            const category = layer.dataset.category;
+            const part = selected[category];
 
-            if (!layer) return;
-
-            layer.hidden = !selected[category];
+            layer.hidden = !part ||
+                part.id !== Number(layer.dataset.componentId);
         });
     }
 
@@ -103,39 +92,42 @@ document.addEventListener('DOMContentLoaded', () => {
             name.textContent = part.name;
 
             details.append(title, name);
-           
-    const quantity = document.createElement('div');
-    quantity.className = 'setup-quantity';
 
-    const decrease = document.createElement('button');
-    decrease.type = 'button';
-    decrease.textContent = '−';
-    decrease.disabled = part.quantity <= 1;
+            if (getMaxQuantity(category) > 1) {
+                const quantity = document.createElement('div');
+                quantity.className = 'setup-quantity';
 
-    const count = document.createElement('span');
-    count.textContent = part.quantity;
+                const decrease = document.createElement('button');
+                decrease.type = 'button';
+                decrease.textContent = '−';
+                decrease.disabled = part.quantity <= 1;
 
-    const increase = document.createElement('button');
-    increase.type = 'button';
-    increase.textContent = '+';
-    increase.disabled = part.quantity >= getMaxQuantity(category);
+                const count = document.createElement('span');
+                count.textContent = part.quantity;
 
-    decrease.addEventListener('click', () => {
-        if (part.quantity > 1) {
-            part.quantity--;
-            updateSummary();
-        }
-    });
+                const increase = document.createElement('button');
+                increase.type = 'button';
+                increase.textContent = '+';
+                increase.disabled =
+                    part.quantity >= getMaxQuantity(category);
 
-    increase.addEventListener('click', () => {
-        if (part.quantity < getMaxQuantity(category)) {
-            part.quantity++;
-            updateSummary();
-        }
-    });
+                decrease.addEventListener('click', () => {
+                    if (part.quantity > 1) {
+                        part.quantity--;
+                        updateSummary();
+                    }
+                });
 
-    quantity.append(decrease, count, increase);
-    details.appendChild(quantity);
+                increase.addEventListener('click', () => {
+                    if (part.quantity < getMaxQuantity(category)) {
+                        part.quantity++;
+                        updateSummary();
+                    }
+                });
+
+                quantity.append(decrease, count, increase);
+                details.appendChild(quantity);
+            }
 
             const remove = document.createElement('button');
             remove.type = 'button';
@@ -167,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
         categories.forEach(button => {
             const category = button.dataset.category;
             const checked = Boolean(selected[category]);
-
             const indicator = button.querySelector('.category-check');
 
             if (indicator) {
@@ -176,8 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         options.forEach(option => {
-            const category = option.dataset.category;
-            const part = selected[category];
+            const part = selected[option.dataset.category];
 
             option.classList.toggle(
                 'selected',
@@ -198,6 +188,14 @@ document.addEventListener('DOMContentLoaded', () => {
     options.forEach(option => {
         option.addEventListener('click', () => {
             const category = option.dataset.category;
+
+            if (category === 'cooler') {
+                delete selected['water-cooler'];
+            }
+
+            if (category === 'water-cooler') {
+                delete selected['cooler'];
+            }
 
             selected[category] = {
                 id: Number(option.dataset.id),
