@@ -14,8 +14,7 @@
 
         <aside class="config-panel">
             <h2>Componentes</h2>
-
-           
+ 
             @foreach([
                 'gabinete' => 'Gabinete',
                 'processador' => 'Processador',
@@ -45,12 +44,17 @@
                         src="{{ asset('images/montagem/gabinete.png') }}"
                         alt="Gabinete do computador">
 
+                    
                     @foreach([
                         'placa-mae',
                         'processador',
                         'memoria',
-                        'placa-video'
+                        'placa-video',
+                        'ssd',
+                        'fonte',
+                        'fans'
                     ] as $layer)
+
                         <img
                             id="layer-{{ $layer }}"
                             class="pc-layer component-layer"
