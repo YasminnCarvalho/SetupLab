@@ -15,12 +15,18 @@
         <aside class="config-panel">
             <h2>Componentes</h2>
 
+           
             @foreach([
+                'gabinete' => 'Gabinete',
                 'processador' => 'Processador',
                 'placa-mae' => 'Placa-mãe',
                 'memoria' => 'Memória RAM',
-                'placa-video' => 'Placa de vídeo'
+                'placa-video' => 'Placa de vídeo',
+                'ssd' => 'SSD / Armazenamento',
+                'fonte' => 'Fonte de alimentação',
+                'fans' => 'Fans / Ventoinhas'
             ] as $key => $label)
+
                 <button
                     type="button"
                     class="config-category"
