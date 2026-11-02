@@ -23,7 +23,11 @@
                 'placa-video' => 'Placa de vídeo',
                 'ssd' => 'SSD / Armazenamento',
                 'fonte' => 'Fonte de alimentação',
-                'fans' => 'Fans / Ventoinhas'
+                'fans' => 'Fans / Ventoinhas',
+                'hd' => 'HD / Disco rígido',
+                'cooler' => 'Cooler do processador',
+                'water-cooler' => 'Water cooler',
+
             ] as $key => $label)
 
                 <button

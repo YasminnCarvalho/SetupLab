@@ -70,6 +70,27 @@ class CatalogoComponentes
                 'preco' => 189.90,
                 'imagem' => 'fans.png',
             ],
+            [
+                'id' => 10,
+                'nome' => 'Seagate BarraCuda 2TB',
+                'categoria' => 'hd',
+                'preco' => 429.90,
+                'imagem' => 'hd.png',
+            ],
+            [
+                'id' => 11,
+                'nome' => 'DeepCool AK400',
+                'categoria' => 'cooler',
+                'preco' => 189.90,
+                'imagem' => 'cooler.png',
+            ],
+            [
+                'id' => 12,
+                'nome' => 'Cooler Master MasterLiquid 240L',
+                'categoria' => 'water-cooler',
+                'preco' => 499.90,
+                'imagem' => 'water-cooler.png',
+            ],
         ];
     }
 
