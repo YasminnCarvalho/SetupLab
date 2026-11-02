@@ -93,4 +93,6 @@
 
 </section>
 
+<script src="{{ asset('js/componentes.js') }}" defer></script>
+
 @endsection
