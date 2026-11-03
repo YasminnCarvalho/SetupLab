@@ -41,3 +41,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/setups', [MontagemController::class, 'index'])
     ->middleware('auth')
     ->name('setups.index');
+
+    Route::get('/setups/{montagem}', [MontagemController::class, 'show'])
+    ->middleware('auth')
+    ->name('setups.show');

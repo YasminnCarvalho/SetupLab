@@ -41,6 +41,11 @@
                         @endforeach
                     </div>
 
+                    <a href="{{ route('setups.show', $montagem) }}"
+                        class="setups-button"
+                        style="margin-bottom: 20px;">
+                            Ver detalhes
+                    </a>
                     <div class="setup-card-footer">
                         <div>
                             <small>Valor total</small>

@@ -85,4 +85,16 @@ class MontagemController extends Controller
         return view('setups.index', compact('montagens'));
     }
 
+        public function show(Request $request, Montagem $montagem)
+    {
+            abort_unless(
+                $montagem->user_id === $request->user()->id,
+                404
+            );
+
+            $montagem->load('montagemComponentes.componente');
+
+        return view('setups.show', compact('montagem'));
+    }
+
 }
