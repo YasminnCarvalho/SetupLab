@@ -3,13 +3,11 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>@yield('title', 'SetupLab')</title>
 
-    <link rel="stylesheet"
-          href="{{ asset('css/setuplab.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/setuplab.css') }}">
 </head>
 
 <body>
@@ -28,9 +26,31 @@
         </nav>
 
         <div class="nav-actions">
-            <a href="/setups" class="btn-outline">
-                Meus Setups
-            </a>
+            @auth
+                <a href="/setups" class="btn-outline">
+                    Meus Setups
+                </a>
+
+                <span class="nav-user-name">
+                    Olá, {{ auth()->user()->name }}
+                </span>
+
+               <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                    @csrf
+
+                    <button type="submit" class="btn-outline logout-button">
+                        Sair
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="btn-outline">
+                    Entrar
+                </a>
+
+                <a href="{{ route('register') }}" class="btn-primary">
+                    Cadastrar
+                </a>
+            @endauth
         </div>
     </header>
 
