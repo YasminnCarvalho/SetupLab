@@ -922,3 +922,37 @@ a {
     background: rgba(168, 85, 247, 0.12);
     border-color: #a855f7;
 }
+
+.setup-save-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.setup-save-form label {
+    color: #e9e4f0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.setup-save-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    background: #15111f;
+    color: #ffffff;
+    border: 1px solid #393047;
+    border-radius: 10px;
+    font: inherit;
+}
+
+.setup-save-form input:focus {
+    outline: none;
+    border-color: #a855f7;
+}
+
+.setup-save-form .btn-primary {
+    width: 100%;
+    cursor: pointer;
+}

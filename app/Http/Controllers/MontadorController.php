@@ -8,7 +8,7 @@ class MontadorController extends Controller
 {
     public function index()
     {
-        $componentes = CatalogoComponentes::todos();
+        $componentes = CatalogoComponentes::todosDoBanco();
 
         return view('montador.index', compact('componentes'));
     }

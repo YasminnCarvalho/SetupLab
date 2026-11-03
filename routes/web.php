@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MontadorController;
 use App\Http\Controllers\ComponenteController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MontagemController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -32,3 +33,7 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+
+Route::post('/montagens', [MontagemController::class, 'store'])
+    ->middleware('auth')
+    ->name('montagens.store');

@@ -116,15 +116,28 @@
                 <strong id="setup-total">R$ 0,00</strong>
             </div>
 
-            <button
-                type="button"
-                id="save-setup"
-                class="btn-primary"
-            >
-                Salvar montagem
-            </button>
+            <div class="setup-save-form">
+                <label for="setup-name">Nome da montagem</label>
 
-            <p id="save-feedback" aria-live="polite"></p>
+                <input
+                    type="text"
+                    id="setup-name"
+                    placeholder="Ex.: Meu PC Gamer"
+                    maxlength="255"
+                    value="Meu Setup"
+                >
+
+                <button
+                    type="button"
+                    id="save-setup"
+                    class="btn-primary"
+                    data-save-url="{{ route('montagens.store') }}"
+                >
+                    Salvar montagem
+                </button>
+
+                <p id="save-feedback" aria-live="polite"></p>
+            </div>
         </aside>
     </div>
 </section>

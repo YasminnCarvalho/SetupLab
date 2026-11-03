@@ -224,18 +224,68 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    if (saveButton && saveFeedback) {
-        saveButton.addEventListener('click', () => {
-            if (Object.keys(selected).length === 0) {
-                saveFeedback.textContent =
-                    'Selecione pelo menos um componente.';
+ 
+if (saveButton && saveFeedback) {
+    saveButton.addEventListener('click', async () => {
+        if (Object.keys(selected).length === 0) {
+            saveFeedback.textContent = 'Selecione pelo menos um componente.';
+            return;
+        }
+
+const nameInput = document.getElementById('setup-name');
+const nome = nameInput.value.trim();
+
+if (!nome) {
+    saveFeedback.textContent = 'Informe um nome para a montagem.';
+    nameInput.focus();
+    return;
+}
+
+        const componentes = Object.values(selected).map(part => ({
+            id: part.id,
+            quantidade: part.quantity
+        }));
+
+        saveButton.disabled = true;
+        saveFeedback.textContent = 'Salvando montagem...';
+
+        try {
+            const response = await fetch(saveButton.dataset.saveUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({
+                    nome: nome.trim(),
+                    componentes
+                })
+            });
+
+            if (response.status === 401) {
+                saveFeedback.textContent = 'Faça login para salvar sua montagem.';
                 return;
             }
 
-            saveFeedback.textContent =
-                'O salvamento no banco de dados será implementado em breve.';
-        });
-    }
+            const resultado = await response.json();
+
+            if (!response.ok) {
+                saveFeedback.textContent =
+                    resultado.message || 'Não foi possível salvar a montagem.';
+                return;
+            }
+
+            saveFeedback.textContent = resultado.message;
+        } catch (error) {
+            saveFeedback.textContent = 'Erro de conexão ao salvar a montagem.';
+        } finally {
+            saveButton.disabled = false;
+        }
+    });
+}
+
 
     chooseCategory('processador');
     updateSummary();
