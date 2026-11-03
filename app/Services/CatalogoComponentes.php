@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Componente;
+
 class CatalogoComponentes
 {
     public static function todos(): array
@@ -121,5 +123,46 @@ class CatalogoComponentes
             'cooler' => 'Cooler do processador',
             'water-cooler' => 'Water cooler',
         ];
+    }
+
+    public static function todosDoBanco(): array
+    {
+        return Componente::with('categoria')
+            ->where('ativo', true)
+            ->get()
+            ->map(function ($componente) {
+                return [
+                    'id' => $componente->id,
+                    'nome' => $componente->nome,
+                    'categoria' => self::categoriaParaSlug(
+                        $componente->categoria?->codigo
+                    ),
+                    'preco' => (float) $componente->preco,
+                    'estoque' => $componente->estoque,
+                    'imagem_catalogo' => $componente->imagem_catalogo,
+                    'imagem_montagem' => $componente->imagem_montagem,
+                ];
+            })
+            ->toArray();
+    }
+
+    private static function categoriaParaSlug(?string $codigo): ?string
+    {
+        $categorias = [
+            'PROC' => 'processador',
+            'CPU' => 'processador',
+            'GPU' => 'placa-video',
+            'MOBO' => 'placa-mae',
+            'RAM' => 'memoria',
+            'SSD' => 'ssd',
+            'HD' => 'hd',
+            'PSU' => 'fonte',
+            'CASE' => 'gabinete',
+            'FAN' => 'fans',
+            'COOLER' => 'cooler',
+            'WATER' => 'water-cooler',
+        ];
+
+        return $categorias[strtoupper($codigo ?? '')] ?? null;
     }
 }
