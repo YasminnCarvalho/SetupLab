@@ -45,6 +45,20 @@
                 R$ {{ number_format($montagem->preco_total, 2, ',', '.') }}
             </strong>
         </div>
+    
+        <form
+            action="{{ route('setups.destroy', $montagem) }}"
+            method="POST"
+            onsubmit="return confirm('Tem certeza que deseja excluir esta montagem?');"
+            style="margin-top: 24px;"
+        >
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="setup-delete-button">
+                Excluir montagem
+            </button>
+        </form>
     </article>
 </div>
 @endsection

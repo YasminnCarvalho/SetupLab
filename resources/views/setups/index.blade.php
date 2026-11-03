@@ -3,6 +3,11 @@
 
 @section('content')
 <div class="setups-page">
+        @if (session('success'))
+    <div class="setup-success-message">
+            {{ session('success') }}
+    </div>
+        @endif
     <div class="setups-header">
         <h1>Meus Setups</h1>
         <p>Veja as montagens que você salvou.</p>

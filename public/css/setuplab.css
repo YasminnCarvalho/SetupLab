@@ -1068,3 +1068,34 @@ a {
 .setups-button:hover {
     background: #6d28d9;
 }
+
+
+.setup-delete-button {
+    background: #dc2626;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.setup-delete-button:hover {
+    background: #b91c1c;
+}
+
+.setup-delete-button:focus-visible {
+    outline: 2px solid #fca5a5;
+    outline-offset: 3px;
+}
+
+.setup-success-message {
+    background: #14532d;
+    color: #dcfce7;
+    border: 1px solid #166534;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+}

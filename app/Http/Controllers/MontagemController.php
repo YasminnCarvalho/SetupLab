@@ -96,5 +96,19 @@ class MontagemController extends Controller
 
         return view('setups.show', compact('montagem'));
     }
+        public function destroy(Request $request, Montagem $montagem)
+        {
+            abort_unless(
+                (int) $montagem->user_id === (int) $request->user()->id,
+                404
+            );
+
+            $montagem->delete();
+
+            return redirect()
+                ->route('setups.index')
+                ->with('success', 'Montagem excluída com sucesso!');
+        }
+
 
 }

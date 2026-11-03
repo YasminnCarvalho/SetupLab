@@ -45,3 +45,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/setups/{montagem}', [MontagemController::class, 'show'])
     ->middleware('auth')
     ->name('setups.show');
+
+    Route::delete('/setups/{montagem}', [MontagemController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('setups.destroy');
