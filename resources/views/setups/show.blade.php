@@ -46,6 +46,10 @@
             </strong>
         </div>
     
+        <a href="{{ route('setups.edit', $montagem) }}" class="setups-button">
+            Editar montagem
+        </a>
+
         <form
             action="{{ route('setups.destroy', $montagem) }}"
             method="POST"

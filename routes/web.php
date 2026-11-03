@@ -49,3 +49,7 @@ Route::middleware('guest')->group(function () {
     Route::delete('/setups/{montagem}', [MontagemController::class, 'destroy'])
     ->middleware('auth')
     ->name('setups.destroy');
+    
+    Route::get('/setups/{montagem}/editar', [MontagemController::class, 'edit'])
+    ->middleware('auth')
+    ->name('setups.edit');

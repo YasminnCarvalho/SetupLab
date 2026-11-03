@@ -108,7 +108,19 @@ class MontagemController extends Controller
             return redirect()
                 ->route('setups.index')
                 ->with('success', 'Montagem excluída com sucesso!');
-        }
+        }    
+        public function edit(Request $request, Montagem $montagem)
+        {
+            abort_unless(
+                (int) $montagem->user_id === (int) $request->user()->id,
+                404
+            );
 
+            $montagem->load('montagemComponentes.componente');
+
+            $componentes = \App\Services\CatalogoComponentes::todosDoBanco();
+
+            return view('setups.edit', compact('montagem', 'componentes'));
+        }
 
 }
