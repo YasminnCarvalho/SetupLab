@@ -488,21 +488,16 @@ a {
 
 .pc-stage {
     position: relative;
-    isolation: isolate;
-    width: min(100%, 520px);
+    width: 100%;
     aspect-ratio: 1 / 1;
-    flex: 0 0 auto;
-    margin: 0 auto;
 }
 
 .pc-layer {
     position: absolute;
     inset: 0;
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    pointer-events: none;
 }
 
 .pc-layer[hidden] {
@@ -515,6 +510,38 @@ a {
 
 .component-layer {
     z-index: 2;
+}
+
+.component-layer[data-category="placa-mae"] {
+    z-index: 2;
+}
+
+.component-layer[data-category="fonte"],
+.component-layer[data-category="ssd"],
+.component-layer[data-category="hd"] {
+    z-index: 3;
+}
+
+.component-layer[data-category="processador"] {
+    z-index: 4;
+}
+
+.component-layer[data-category="memoria"] {
+    z-index: 5;
+}
+
+.component-layer[data-category="placa-video"] {
+    z-index: 6;
+}
+
+.component-layer[data-category="cooler"],
+.component-layer[data-category="water-cooler"] {
+    z-index: 7;
+}
+
+.component-layer[data-category="fans-lateral"],
+.component-layer[data-category="fans-topo"] {
+    z-index: 8;
 }
 
 .component-picker {

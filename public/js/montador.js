@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const selected = {};
 
     const quantityLimits = {
-        'memoria': 4,
-        'ssd': 4,
-        'hd': 4,
-        'fans': 6
+        memoria: 4,
+        ssd: 4,
+        hd: 4,
+        fans: 2
     };
 
     const categories = document.querySelectorAll('.config-category');
@@ -20,16 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveFeedback = document.getElementById('save-feedback');
 
     const labels = {
-        'gabinete': 'Gabinete',
-        'processador': 'Processador',
+        gabinete: 'Gabinete',
+        processador: 'Processador',
         'placa-mae': 'Placa-mãe',
-        'memoria': 'Memória RAM',
+        memoria: 'Memória RAM',
         'placa-video': 'Placa de vídeo',
-        'ssd': 'SSD / Armazenamento',
-        'fonte': 'Fonte de alimentação',
-        'fans': 'Fans / Ventoinhas',
-        'hd': 'HD / Disco rígido',
-        'cooler': 'Cooler do processador',
+        ssd: 'SSD / Armazenamento',
+        fonte: 'Fonte de alimentação',
+        fans: 'Fans / Ventoinhas',
+        hd: 'HD / Disco rígido',
+        cooler: 'Cooler do processador',
         'water-cooler': 'Water cooler'
     };
 
@@ -63,9 +63,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function updatePreview() {
         layers.forEach(layer => {
             const category = layer.dataset.category;
+
+            if (category === 'fans-lateral') {
+                layer.hidden = !selected.fans;
+                return;
+            }
+
+            if (category === 'fans-topo') {
+                layer.hidden =
+                    !selected.fans || selected.fans.quantity < 2;
+                return;
+            }
+
             const part = selected[category];
 
-            layer.hidden = !part ||
+            layer.hidden =
+                !part ||
                 part.id !== Number(layer.dataset.componentId);
         });
     }
@@ -115,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (part.quantity > 1) {
                         part.quantity--;
                         updateSummary();
+                        updatePreview();
                     }
                 });
 
@@ -122,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (part.quantity < getMaxQuantity(category)) {
                         part.quantity++;
                         updateSummary();
+                        updatePreview();
                     }
                 });
 
@@ -194,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (category === 'water-cooler') {
-                delete selected['cooler'];
+                delete selected.cooler;
             }
 
             selected[category] = {

@@ -53,7 +53,7 @@ class CatalogoComponentes
                 'categoria' => 'ssd',
                 'preco' => 399.90,
                 'imagem_catalogo' => 'ssd.png',
-                'imagem_montagem' => null,
+                'imagem_montagem' => 'ssd.png',
             ],
             [
                 'id' => 7,
@@ -61,7 +61,7 @@ class CatalogoComponentes
                 'categoria' => 'fonte',
                 'preco' => 649.90,
                 'imagem_catalogo' => 'fonte.png',
-                'imagem_montagem' => null,
+                'imagem_montagem' => 'fonte.png',
             ],
             [
                 'id' => 8,
@@ -93,7 +93,7 @@ class CatalogoComponentes
                 'categoria' => 'cooler',
                 'preco' => 189.90,
                 'imagem_catalogo' => 'cooler.png',
-                'imagem_montagem' => 'cooler.png',
+                'imagem_montagem' => 'air-cooler.png',
             ],
             [
                 'id' => 12,

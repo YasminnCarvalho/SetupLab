@@ -37,7 +37,7 @@
                     >
 
                     @foreach($componentes as $componente)
-                        @if($componente['categoria'] !== 'gabinete' && $componente['imagem_montagem'])
+                        @if($componente['categoria'] !== 'gabinete' && $componente['categoria'] !== 'fans' && $componente['imagem_montagem'])
                             <img
                                 id="layer-{{ $componente['id'] }}"
                                 class="pc-layer component-layer"
@@ -49,6 +49,24 @@
                             >
                         @endif
                     @endforeach
+
+                    <img
+                        id="layer-fans-lateral"
+                        class="pc-layer component-layer"
+                        data-category="fans-lateral"
+                        src="{{ asset('images/montagem/fans-lateral.png') }}"
+                        alt="Fans laterais"
+                        hidden
+                    >
+
+                    <img
+                        id="layer-fans-topo"
+                        class="pc-layer component-layer"
+                        data-category="fans-topo"
+                        src="{{ asset('images/montagem/fans-topo.png') }}"
+                        alt="Fans superiores"
+                        hidden
+                    >
                 </div>
 
                 <p>Prévia ilustrativa da montagem</p>
