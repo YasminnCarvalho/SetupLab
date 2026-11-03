@@ -74,4 +74,15 @@ class MontagemController extends Controller
             'montagem_id' => $montagem->id,
         ], 201);
     }
+        public function index(Request $request)
+    {
+        $montagens = Montagem::query()
+            ->where('user_id', $request->user()->id)
+            ->with('montagemComponentes.componente')
+            ->latest()
+            ->get();
+
+        return view('setups.index', compact('montagens'));
+    }
+
 }

@@ -30,10 +30,14 @@ Route::middleware('guest')->group(function () {
         ->name('register.store');
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth')
-    ->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->middleware('auth')
+        ->name('logout');
 
-Route::post('/montagens', [MontagemController::class, 'store'])
+    Route::post('/montagens', [MontagemController::class, 'store'])
+        ->middleware('auth')
+        ->name('montagens.store');
+
+    Route::get('/setups', [MontagemController::class, 'index'])
     ->middleware('auth')
-    ->name('montagens.store');
+    ->name('setups.index');

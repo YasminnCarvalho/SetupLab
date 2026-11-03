@@ -956,3 +956,115 @@ a {
     width: 100%;
     cursor: pointer;
 }
+
+.setups-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+.setups-header {
+    margin-bottom: 32px;
+}
+
+.setups-header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.setups-header p {
+    color: #999;
+}
+
+.setups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.setup-card {
+    background: #171717;
+    border: 1px solid #333;
+    border-radius: 14px;
+    padding: 24px;
+}
+
+.setup-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.setup-card-header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.setup-card-header span {
+    font-size: 13px;
+    color: #999;
+    white-space: nowrap;
+}
+
+.setup-card-components {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.setup-component {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.setup-card-footer {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+}
+
+.setup-card-footer small {
+    display: block;
+    color: #999;
+    margin-bottom: 6px;
+}
+
+.setup-card-footer strong {
+    font-size: 24px;
+    color: #a78bfa;
+}
+
+.setups-empty {
+    text-align: center;
+    padding: 70px 24px;
+    background: #171717;
+    border: 1px solid #333;
+    border-radius: 14px;
+}
+
+.setups-empty h2 {
+    margin-bottom: 12px;
+}
+
+.setups-empty p {
+    color: #999;
+    margin-bottom: 24px;
+}
+
+.setups-button {
+    display: inline-block;
+    background: #7c3aed;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.setups-button:hover {
+    background: #6d28d9;
+}
