@@ -45,10 +45,6 @@
                 R$ {{ number_format($montagem->preco_total, 2, ',', '.') }}
             </strong>
         </div>
-    
-        <a href="{{ route('setups.edit', $montagem) }}" class="setups-button">
-            Editar montagem
-        </a>
 
         <form
             action="{{ route('setups.destroy', $montagem) }}"

@@ -74,7 +74,8 @@ class MontagemController extends Controller
             'montagem_id' => $montagem->id,
         ], 201);
     }
-        public function index(Request $request)
+
+    public function index(Request $request)
     {
         $montagens = Montagem::query()
             ->where('user_id', $request->user()->id)
@@ -85,42 +86,29 @@ class MontagemController extends Controller
         return view('setups.index', compact('montagens'));
     }
 
-        public function show(Request $request, Montagem $montagem)
+    public function show(Request $request, Montagem $montagem)
     {
-            abort_unless(
-                $montagem->user_id === $request->user()->id,
-                404
-            );
+        abort_unless(
+            (int) $montagem->user_id === (int) $request->user()->id,
+            404
+        );
 
-            $montagem->load('montagemComponentes.componente');
+        $montagem->load('montagemComponentes.componente');
 
         return view('setups.show', compact('montagem'));
     }
-        public function destroy(Request $request, Montagem $montagem)
-        {
-            abort_unless(
-                (int) $montagem->user_id === (int) $request->user()->id,
-                404
-            );
 
-            $montagem->delete();
+    public function destroy(Request $request, Montagem $montagem)
+    {
+        abort_unless(
+            (int) $montagem->user_id === (int) $request->user()->id,
+            404
+        );
 
-            return redirect()
-                ->route('setups.index')
-                ->with('success', 'Montagem excluída com sucesso!');
-        }    
-        public function edit(Request $request, Montagem $montagem)
-        {
-            abort_unless(
-                (int) $montagem->user_id === (int) $request->user()->id,
-                404
-            );
+        $montagem->delete();
 
-            $montagem->load('montagemComponentes.componente');
-
-            $componentes = \App\Services\CatalogoComponentes::todosDoBanco();
-
-            return view('setups.edit', compact('montagem', 'componentes'));
-        }
-
+        return redirect()
+            ->route('setups.index')
+            ->with('success', 'Montagem excluída com sucesso!');
+    }
 }

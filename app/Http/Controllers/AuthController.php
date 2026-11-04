@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('montador.index');
+        return redirect('/');
     }
 
     public function login(Request $request)
@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('montador.index'));
+        return redirect('/');
     }
 
     public function logout(Request $request)
