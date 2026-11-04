@@ -6,11 +6,9 @@
 @section('content')
 
 <section class="hero">
-
     <div class="hero-content">
-
         <div class="hero-badge">
-            ✦ Monte • Planeje • Compartilhe
+            ✦ Monte • Personalize • Salve
         </div>
 
         <h1>
@@ -19,22 +17,16 @@
         </h1>
 
         <p>
-            Escolha os melhores componentes,
-            verifique a compatibilidade,
-            calcule o valor total e compartilhe
-            sua montagem com a comunidade.
+            Escolha seus componentes favoritos,
+            monte seu computador de forma visual,
+            acompanhe o valor total e salve suas montagens.
         </p>
 
         <div class="hero-buttons">
-            <a href="/montador" class="btn-primary">
+            <a href="{{ route('montador.index') }}" class="btn-primary">
                 Montar meu PC →
             </a>
-
-            <a href="/comunidade" class="btn-outline">
-                Explorar setups
-            </a>
         </div>
-
     </div>
 
     <div class="hero-image">
@@ -43,17 +35,15 @@
             alt="Computador gamer SetupLab"
         >
     </div>
-
 </section>
 
 <section class="features">
-
     <div class="feature-card">
-        <div class="feature-icon">⚙️</div>
-        <h3>Compatibilidade</h3>
+        <div class="feature-icon">🖥️</div>
+        <h3>Montagem visual</h3>
         <p>
-            Escolha componentes e descubra
-            se as peças funcionam juntas.
+            Escolha os componentes e visualize
+            a montagem do seu computador.
         </p>
     </div>
 
@@ -67,14 +57,13 @@
     </div>
 
     <div class="feature-card">
-        <div class="feature-icon">👥</div>
-        <h3>Comunidade</h3>
+        <div class="feature-icon">💾</div>
+        <h3>Salve seus setups</h3>
         <p>
-            Compartilhe suas montagens
-            e conheça setups de outras pessoas.
+            Salve suas montagens e acesse
+            seus setups quando quiser.
         </p>
     </div>
-
 </section>
 
 @endsection

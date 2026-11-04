@@ -23,7 +23,6 @@
             <a href="/">Início</a>
             <a href="/montador">Montador</a>
             <a href="/componentes">Componentes</a>
-            <a href="/comunidade">Comunidade</a>
         </nav>
 
         <div class="nav-actions">
@@ -36,7 +35,7 @@
                     Olá, {{ auth()->user()->name }}
                 </span>
 
-               <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                <form method="POST" action="{{ route('logout') }}" class="logout-form">
                     @csrf
 
                     <button type="submit" class="btn-outline logout-button">
@@ -62,7 +61,7 @@
     <footer class="footer">
         <p>
             © {{ date('Y') }} SetupLab.
-            Monte, personalize e compartilhe.
+            Monte, personalize e salve.
         </p>
     </footer>
 
