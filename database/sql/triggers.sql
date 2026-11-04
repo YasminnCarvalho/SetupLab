@@ -31,6 +31,7 @@ BEGIN
 END;
 $$;
 
+DROP TRIGGER IF EXISTS trg_atualizar_total_montagem ON montagem_componentes;
 CREATE TRIGGER trg_atualizar_total_montagem
 AFTER INSERT OR UPDATE OR DELETE
 ON montagem_componentes
@@ -47,6 +48,7 @@ BEGIN
 END;
 $$;
 
+DROP TRIGGER IF EXISTS trg_atualizar_data_componente ON componentes;
 CREATE TRIGGER trg_atualizar_data_componente
 BEFORE UPDATE
 ON componentes
