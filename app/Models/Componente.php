@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Componente extends Model
 {
+    protected $table = 'componentes';
+
     protected $fillable = [
         'categoria_id',
         'nome',
@@ -28,5 +30,10 @@ class Componente extends Model
             'especificacoes' => 'array',
             'ativo' => 'boolean',
         ];
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 }

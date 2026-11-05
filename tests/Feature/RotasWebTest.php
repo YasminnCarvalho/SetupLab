@@ -17,6 +17,6 @@ class RotasWebTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertSee('Laravel');
+        $response->assertSee('Montagem visual');
     }
 }
