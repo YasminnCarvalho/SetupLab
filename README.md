@@ -1,58 +1,196 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SetupLab
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 1. Sobre o projeto
 
-## About Laravel
+O SetupLab é uma aplicação web desenvolvida para auxiliar na montagem e configuração de computadores personalizados. O sistema disponibiliza um catálogo de componentes e recursos para visualizar e organizar montagens, facilitando a escolha das peças que compõem um computador.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O projeto foi desenvolvido utilizando Laravel e PostgreSQL, com o banco de dados hospedado na plataforma Neon.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 2. Tecnologias utilizadas
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.3 ou superior
+- Laravel 13
+- PostgreSQL
+- Neon
+- JavaScript
+- Vite 8
+- Tailwind CSS 4
+- PHPUnit 12
 
-## Learning Laravel
+## 3. Funcionalidades
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Consulta e gerenciamento de componentes;
+- Cadastro, edição e exclusão de componentes pela API;
+- Organização dos componentes por categorias;
+- Catálogo de componentes;
+- Interface para montagem de computadores;
+- Gerenciamento de montagens;
+- Integração com banco de dados PostgreSQL.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 4. Instalação e execução
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Pré-requisitos
 
-## Agentic Development
+- PHP 8.3 ou superior;
+- Composer;
+- Node.js e npm;
+- Acesso ao banco de dados PostgreSQL no Neon.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### Clonar o repositório
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/YasminnCarvalho/SetupLab.git
+cd SetupLab
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Instalar as dependências
 
-## Contributing
+```bash
+composer install
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Configurar o ambiente
 
-## Code of Conduct
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Configurar o banco PostgreSQL
 
-## Security Vulnerabilities
+No arquivo `.env`, configure os dados de conexão disponibilizados pelo Neon:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```env
+DB_CONNECTION=pgsql
+DB_HOST=SEU_HOST
+DB_PORT=5432
+DB_DATABASE=SEU_BANCO
+DB_USERNAME=SEU_USUARIO
+DB_PASSWORD=SUA_SENHA
+```
 
-## License
+Configure o SSL conforme os dados de conexão fornecidos pelo Neon.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Não compartilhe o arquivo `.env`, pois ele contém informações privadas.
+
+### Executar as migrations
+
+```bash
+php artisan migrate
+```
+
+Para carregar os dados iniciais do catálogo:
+
+```bash
+php artisan db:seed --class=CatalogoSetupLabSeeder
+```
+
+### Compilar os arquivos do frontend
+
+```bash
+npm run build
+```
+
+### Iniciar o servidor
+
+```bash
+php artisan serve
+```
+
+A aplicação poderá ser acessada em `http://127.0.0.1:8000`.
+
+## 5. API de componentes
+
+O projeto possui uma API REST desenvolvida em Laravel para realizar operações de gerenciamento de componentes.
+
+As rotas estão definidas em `routes/api.php`, utilizando `Route::apiResource`.
+
+### Endpoints disponíveis
+
+| Método HTTP | Endpoint | Descrição |
+|---|---|---|
+| GET | `/api/componentes` | Lista os componentes |
+| POST | `/api/componentes` | Cadastra um componente |
+| GET | `/api/componentes/{componente}` | Consulta um componente específico |
+| PUT/PATCH | `/api/componentes/{componente}` | Atualiza um componente |
+| DELETE | `/api/componentes/{componente}` | Exclui um componente |
+
+### Exemplo de cadastro
+
+Requisição: `POST /api/componentes`
+
+```json
+{
+    "categoria_id": 2,
+    "nome": "Processador Ryzen 5",
+    "preco": 899.90,
+    "estoque": 10
+}
+```
+
+A API realiza a validação dos dados recebidos e retorna respostas no formato JSON.
+
+## 6. Banco de dados
+
+O banco de dados utilizado no projeto é o PostgreSQL, hospedado no Neon.
+
+A estrutura contempla tabelas para armazenamento de categorias, componentes e montagens, além de seus relacionamentos.
+
+### Recursos implementados
+
+- Chaves primárias e estrangeiras;
+- Relacionamentos entre tabelas;
+- Índices para otimização de consultas;
+- Funções SQL;
+- Procedures;
+- Triggers.
+
+### Scripts SQL
+
+Os scripts utilizados na implementação dos recursos do banco estão organizados na pasta `database/sql/`:
+
+- `funcoes.sql`: funções do banco de dados;
+- `procedures.sql`: procedures implementadas;
+- `triggers.sql`: gatilhos responsáveis por executar ações automaticamente em determinadas operações.
+
+## 7. Testes automatizados
+
+O projeto utiliza PHPUnit para execução dos testes automatizados.
+
+Para executar os testes:
+
+```bash
+php artisan test
+```
+
+Os testes verificam o funcionamento das rotas e das funcionalidades da aplicação.
+
+## 8. Backup e restauração
+
+O projeto contempla procedimentos de backup e restauração do banco de dados PostgreSQL.
+
+A criação e a restauração são realizadas por meio das ferramentas do PostgreSQL, como `pg_dump` e `pg_restore`, utilizando os dados de conexão do banco.
+
+Os arquivos de backup devem ser armazenados com segurança e não devem ser publicados no repositório sem autorização.
+
+## 9. Estrutura do projeto
+
+| Diretório | Finalidade |
+|---|---|
+| `app/Http/Controllers/` | Controllers da aplicação |
+| `app/Http/Controllers/Api/` | Controller responsável pela API |
+| `app/Models/` | Models e relacionamentos |
+| `app/Services/` | Serviços e regras de negócio |
+| `database/migrations/` | Migrations do banco |
+| `database/seeders/` | Dados iniciais |
+| `database/sql/` | Scripts SQL |
+| `resources/views/` | Telas da aplicação |
+| `routes/` | Definição das rotas |
+| `tests/` | Testes automatizados |
+
+## 10. Repositório
+
+Código-fonte do projeto:
+
+https://github.com/YasminnCarvalho/SetupLab
