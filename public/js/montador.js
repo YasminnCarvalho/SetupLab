@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
- 
+
 if (saveButton && saveFeedback) {
     saveButton.addEventListener('click', async () => {
         if (Object.keys(selected).length === 0) {
